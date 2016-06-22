@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+import sys, os
 import pygame
 import pexpect.pxssh
 import pxssh
@@ -28,7 +29,7 @@ screen = pygame.display.set_mode(size)
 motor = [0, 0, 0, 0]
 angle = [0, 0, 0, 0]
 
-try:
+"""try:
 	s = pxssh.pxssh()
 	username = "root"
 	password = ""
@@ -40,52 +41,69 @@ try:
 except pxssh.ExceptionPxssh, e:
 	print "pxssh failed on login."
 	print str(e)
+"""
+sys.stdout = os.devnull
+sys.stderr = os.devnull
 
 while True:
-	sys.stdout = linux.devnull
-	sys.stderr = linux.devnull
 	for event in pygame.event.get(): # Checks if something happened; This seems to be required for the joystick things to happen.
 		if event.type == pygame.QUIT:
 			quit()
 	if rjoystick.get_button( TRIGGER ) == 1:
+		#s.sendline ('python trigger.py')
+		#s.prompt()
 		sys.stdout = sys.__stdout__
-		sys.stderr = sys.__stderr__		
-		s.sendline ('python trigger.py')
-		s.prompt()
-		print s.before
+		sys.stderr = sys.__stderr__
+		#print s.before
+		sys.stdout = os.devnull
+		sys.stderr = os.devnull
 	if rjoystick.get_axis( X_AXIS ) >= 15000:
+		#s.sendline ('roll_right.py')
+		#s.prompt()
 		sys.stdout = sys.__stdout__
 		sys.stderr = sys.__stderr__		
-		s.sendline ('roll_right.py')
-		s.prompt()
-		print s.before
+		#print s.before
+		sys.stdout = os.devnull
+		sys.stderr = os.devnull
 	if rjoystick.get_axis( X_AXIS ) <= -15000:
+		#s.sendline ('roll_left.py')
+		#s.prompt()
 		sys.stdout = sys.__stdout__
 		sys.stderr = sys.__stderr__		
-		s.sendline ('roll_left.py')
-		s.prompt()
-		print s.before
+		#print s.before
+		sys.stdout = os.devnull
+		sys.stderr = os.devnull
 	if rjoystick.get_axis( Y_AXIS ) >= 15000:
+		#s.sendline ('python pitch_up.py')
+		#s.prompt()
 		sys.stdout = sys.__stdout__
-		sys.stderr = sys.__stderr__
-		s.sendline ('python pitch_up.py')
-		s.prompt()
-		print s.before
+		sys.stderr = sys.__stderr__		
+		#print s.before
+		sys.stdout = os.devnull
+		sys.stderr = os.devnull
 	if rjoystick.get_axis( Y_AXIS ) <= -15000:
+		#s.sendline ('python pitch_down.py')
+		#s.prompt()
 		sys.stdout = sys.__stdout__
 		sys.stderr = sys.__stderr__		
-		s.sendline ('python pitch_down.py')
-		s.prompt()
-		print s.before
+		#print s.before
+		sys.stdout = os.devnull
+		sys.stderr = os.devnull
 	if rjoystick.get_axis( Z_AXIS ) >= 15000:
-		sys.stdout = sys.__stdout__
-		sys.stderr = sys.__stderr__
-		s.sendline ('python yaw_right.py')
-		s.prompt()
-		print s.before
-	if rjoystick.get_axis( Z_AXIS ) >= 15000:
+		#s.sendline ('python yaw_right.py')
+		#s.prompt()
 		sys.stdout = sys.__stdout__
 		sys.stderr = sys.__stderr__		
-		s.sendline ('python yaw_left.py')
-		s.prompt()
-		print s.before
+		#print s.before
+		sys.stdout = os.devnull
+		sys.stderr = os.devnull
+	if rjoystick.get_axis( Z_AXIS ) >= 15000:
+		#s.sendline ('python yaw_left.py')
+		#s.prompt()
+		sys.stdout = sys.__stdout__
+		sys.stderr = sys.__stderr__				
+		#print s.before
+		sys.stdout = os.devnull
+		sys.stderr = os.devnull
+	if rjoystick.get_button( 1 ) == 1:
+                quit()
